@@ -1,10 +1,8 @@
 ﻿using System;
+using DemoLibrary.Models;
+using MediatR;
+
 namespace DemoLibrary.Queries
 {
-    public class GetPersonByIdQuery
-    {
-        public GetPersonByIdQuery()
-        {
-        }
-    }
+    public record GetPersonByIdQuery(int Id) : IRequest<PersonModel>;
 }

@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using DemoLibrary.Models;
+using MediatR;
+
 namespace DemoLibrary.Queries
 {
-    public class GetPersonListQuery
-    {
-        public GetPersonListQuery()
-        {
-        }
-    }
+    public record GetPersonListQuery() : IRequest<List<PersonModel>>;
+
+    //public class GetPersonListQueryClass : IRequest<List<PersonModel>>
+    //{
+    //}
 }

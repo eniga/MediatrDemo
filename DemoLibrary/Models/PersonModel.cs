@@ -1,5 +1,5 @@
 ﻿using System;
-namespace DemoLibrary.DataAccess.Models
+namespace DemoLibrary.Models
 {
     public class PersonModel
     {

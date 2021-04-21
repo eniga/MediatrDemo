@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MediatRDemo.Data;
+using DemoLibrary.DataAccess;
+using MediatR;
+using DemoLibrary;
 
 namespace MediatRDemo
 {
@@ -29,6 +32,8 @@ namespace MediatRDemo
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<IDataAccess, DemoDataAccess>();
+            services.AddMediatR(typeof(DemoLibraryMediatREntrypoint).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DemoLibrary.Commands;
+using DemoLibrary.Models;
+using DemoLibrary.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,36 +14,32 @@ namespace MediatR.Api.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
+        public readonly IMediator _mediator;
+
+        public PersonController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         // GET: api/Person
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<List<PersonModel>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await _mediator.Send(new GetPersonListQuery());
         }
 
         // GET: api/Person/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public async Task<PersonModel> GetAsync(int id)
         {
-            return "value";
+            return await _mediator.Send(new GetPersonByIdQuery(id));
         }
 
         // POST: api/Person
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<PersonModel> PostAsync([FromBody] PersonModel value)
         {
-        }
-
-        // PUT: api/Person/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/Person/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return await _mediator.Send(new InsertPersonCommand(value.FirstName, value.LastName));
         }
     }
 }

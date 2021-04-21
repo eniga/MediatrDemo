@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DemoLibrary.DataAccess.Models;
+using DemoLibrary.Models;
 
 namespace DemoLibrary.DataAccess
 {
